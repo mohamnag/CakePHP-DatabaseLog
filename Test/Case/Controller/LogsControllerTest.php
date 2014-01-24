@@ -15,7 +15,7 @@ class LogsControllerTest extends CakeTestCase {
 	}
 
 	public function testIndex() {
-		$this->Logs->admin_index();
+		$this->Logs->index();
 
 		$this->assertTrue(!empty($this->Logs->viewVars['logs']));
 	}
@@ -27,7 +27,7 @@ class LogsControllerTest extends CakeTestCase {
 		);
 		$this->Logs->Log->create();
 		$res = $this->Logs->Log->save($data);
-		$this->Logs->admin_view($this->Logs->Log->id);
+		$this->Logs->view($this->Logs->Log->id);
 
 		$this->assertEquals('some more text', $this->Logs->viewVars['log']['Log']['message']);
 	}
@@ -39,7 +39,7 @@ class LogsControllerTest extends CakeTestCase {
 	 * @expectedException MethodNotAllowedException
 	 */
 	public function testDeleteWithoutPost() {
-		$this->Logs->admin_delete(123);
+		$this->Logs->delete(123);
 	}
 
 	public function testDelete() {
@@ -50,7 +50,7 @@ class LogsControllerTest extends CakeTestCase {
 		);
 		$this->Logs->Log->create();
 		$res = $this->Logs->Log->save($data);
-		$this->Logs->admin_delete($this->Logs->Log->id);
+		$this->Logs->delete($this->Logs->Log->id);
 	}
 
 	/**
@@ -60,7 +60,7 @@ class LogsControllerTest extends CakeTestCase {
 	 * @expectedException MethodNotAllowedException
 	 */
 	public function testResetWithoutPost() {
-		$this->Logs->admin_reset();
+		$this->Logs->reset();
 	}
 
 	public function testReset() {
@@ -71,14 +71,14 @@ class LogsControllerTest extends CakeTestCase {
 		);
 		$this->Logs->Log->create();
 		$res = $this->Logs->Log->save($data);
-		$this->Logs->admin_reset();
+		$this->Logs->reset();
 
 		$count = $this->Logs->Log->find('count');
 		$this->assertSame(0, $count);
 	}
 
 	public function testRemoveDuplicates() {
-		$this->Logs->admin_remove_duplicates();
+		$this->Logs->remove_duplicates();
 	}
 
 }
