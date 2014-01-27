@@ -29,32 +29,29 @@ class LogsController extends DatabaseLogAppController {
         $this->set('filter', $filter);
     }
 
-    public function view($id = null) {
-        if (!$id) {
-            $this->Session->setFlash(__('Invalid log'));
+    public function view($id) {
+        $log = $this->Log->read(null, $id);
+        if (!$log) {
+            $this->Session->setFlash(__('Referenced log could not be found'));
             $this->redirect(array('action' => 'index'));
         }
-        $this->set('log', $this->Log->read(null, $id));
+        $this->set('log', $log);
     }
 
-    public function delete($id = null) {
-        $this->request->onlyAllow('post');
-        if (!$id) {
-            $this->Session->setFlash(__('Invalid id for log'));
-            $this->redirect(array('action' => 'index'));
-        }
+    public function delete($id) {
         if ($this->Log->delete($id)) {
             $this->Session->setFlash(__('Log deleted'));
-            $this->redirect(array('action' => 'index'));
         }
-        $this->Session->setFlash(__('Log was not deleted'));
+        else {
+            $this->Session->setFlash(__('Log could not be deleted'));
+        }
+        
         $this->redirect(array('action' => 'index'));
     }
 
     public function reset() {
-        $this->request->onlyAllow('post');
-
         $this->Log->deleteAll('1 = 1');
+        
         $this->redirect(array('action' => 'index'));
     }
 
