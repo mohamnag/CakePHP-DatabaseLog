@@ -1,4 +1,4 @@
-<h1><?php echo __('Members\'s activity log') ?></h1>
+<h1><?php echo __('List logs') ?></h1>
 
 <?php echo $this->Html->link(__('Remove %s', __('Duplicates')), array('action' => 'remove_duplicates')); ?>
 <?php echo $this->Html->link(__('Reset %s', __('Logs')), array('action' => 'reset')); ?>

@@ -1,4 +1,4 @@
-<h1><?php echo __('Members\'s activity log') ?></h1>
+<h1><?php echo __('View log') ?></h1>
 
 <?php echo $this->Html->link(__('Delete Log'), array('action' => 'delete', $log['Log']['id']), array(), __('Are you sure you want to delete this log?')); ?>
 <?php echo $this->Html->link(__('Back to list'), array('action' => 'index')); ?>
